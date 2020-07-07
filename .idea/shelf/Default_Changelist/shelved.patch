@@ -1,0 +1,622 @@
+Index: src/practico/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/practico/Main.java	(date 1594092151760)
++++ src/practico/Main.java	(date 1594092151760)
+@@ -0,0 +1,76 @@
++package practico;
++
++import javax.swing.*;
++
++import static java.lang.Integer.*;
++import static javax.swing.JOptionPane.*;
++
++public class Main {
++
++    public static void main(String[] args) {
++
++      if(Validacion.Validar()) {
++
++          Resolucion.carga();
++          menu();
++          }
++
++    }
++
++    public static void menu() {
++        int numMenu;
++        do {
++        numMenu = Integer.parseInt(showInputDialog(null, "                                                          " +
++                "               Ingrese una opcion: " +
++                "\n 1) Cantidad de casos confirmados (test positivo) y porcentaje sobre el total de casos." +
++                "\n 2) Edad promedio de los pacientes que pertenecen a grupo de riesgo." +
++                "\n 3) Cantidad y porcentaje que el personal de salud reprecenta cada uno sobre el total de casos." +
++                "\n 4) Edad promedio entre los casos confirmados." +
++                "\n 5) Menor edad entre los casos autoctonos." +
++                "\n 6) Cantidad de casos confirmados por región y porcentaje que reprecenta cada uno sobre el total de casos." +
++                "\n 7) Cantidad de casos confirmados con viaje al exterior." +
++                "\n 8) Cantidad de casos sospechosos en contacto con casos confirmados." +
++                "\n 9) Las regiones sin casos confirmados." +
++                "\n 10) Porcentaje de casos positivos autóctonos sobre el total de positivos.", "           Menu", INFORMATION_MESSAGE));
++
++        switch (numMenu) {
++            case 1:
++                JOptionPane.showMessageDialog(null, "La cantidad de casos Confirmado es: " + Resolucion.cantidadCasosConfirmados() +
++                        "\nEl porcentaje es: " + Resolucion.porcentajeCasos() + "%");
++                break;
++
++            case 2:
++                if (Resolucion.edadPromedioMayores()!=0) {
++                    JOptionPane.showMessageDialog(null, "La edad promedio de pacientes con grupo de riesgo es: " + Resolucion.edadPromedioMayores());
++                }else JOptionPane.showMessageDialog(null, "No tiene pacientes de grupo de riesgo");
++                break;
++
++            case 3:
++                JOptionPane.showMessageDialog(null, "La cantidad de casos Confirmados de personal de la salud es: " + Resolucion.cantidadCasosSalud() +
++                        "\nEl porcentaje de casos que representa el personal de salud es: " + Resolucion.promedioSalud() + "%");
++                break;
++            case 4:
++                    JOptionPane.showMessageDialog(null, "La edad promedio de pacientes con casos confirmado es: " + Resolucion.edadPromCasosConf() + " años");
++                break;
++            case 5:
++                JOptionPane.showMessageDialog(null, "La menor edad de los casos autoctonos: " + Resolucion.menorEdadAutoctono());
++                break;
++            case 6:
++                JOptionPane.showMessageDialog(null, Resolucion.region());
++                break;
++            case 7:
++                JOptionPane.showMessageDialog(null, "La cantidad de personas infectadas que viajaron al exterior: " + Resolucion.cantidadViajaron());
++                break;
++            case 8:
++                JOptionPane.showMessageDialog(null, "La cantidad de casos sospechosos en contacto con casos confirmados: " + Resolucion.casosSospechosos());
++                break;
++            case 9:
++                JOptionPane.showMessageDialog(null, "Las regiones sin casos confirmados: " + Resolucion.regionSinCasos());
++                break;
++            case 10:
++                JOptionPane.showMessageDialog(null, "El porcentaje de casos positivos autoctonos es: " + Resolucion.porcentCasosAutoct() + "%");
++                break;
++            }
++        } while (numMenu >=0 && numMenu <= 11);
++    }
++}
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.gitignore	(date 1594090590132)
++++ .idea/.gitignore	(date 1594090590132)
+@@ -0,0 +1,3 @@
++# Default ignored files
++/shelf/
++/workspace.xml
+Index: .idea/project-template.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/project-template.xml	(date 1592403200193)
++++ .idea/project-template.xml	(date 1592403200193)
+@@ -0,0 +1,3 @@
++<template>
++  <input-field default="com.company">IJ_BASE_PACKAGE</input-field>
++</template>
+\ No newline at end of file
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(date 1592403237764)
++++ .idea/modules.xml	(date 1592403237764)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/Ejercicio COVID.iml" filepath="$PROJECT_DIR$/Ejercicio COVID.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/description.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/description.html	(date 1592403200162)
++++ .idea/description.html	(date 1592403200162)
+@@ -0,0 +1,1 @@
++<html>Simple <b>Java</b> application that includes a class with <code>main()</code> method</html>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(date 1594090671389)
++++ .idea/misc.xml	(date 1594090671389)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectKey">
++    <option name="state" value="project://e2804f05-5315-4fc6-a121-c522a6c26470" />
++  </component>
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8 (1)" project-jdk-type="JavaSDK">
++    <output url="file://$PROJECT_DIR$/out" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1594091990716)
++++ .idea/vcs.xml	(date 1594091990716)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/encodings.xml	(date 1592403237733)
++++ .idea/encodings.xml	(date 1592403237733)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="Encoding">
++    <file url="PROJECT" charset="UTF-8" />
++  </component>
++</project>
+\ No newline at end of file
+Index: Ejercicio COVID.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Ejercicio COVID.iml	(date 1592403200224)
++++ Ejercicio COVID.iml	(date 1592403200224)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="JAVA_MODULE" version="4">
++  <component name="NewModuleRootManager" inherit-compiler-output="true">
++    <exclude-output />
++    <content url="file://$MODULE_DIR$">
++      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
++
+Index: src/practico/Resolucion.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/practico/Resolucion.java	(date 1592618615505)
++++ src/practico/Resolucion.java	(date 1592618615505)
+@@ -0,0 +1,186 @@
++package practico;
++
++import javax.swing.*;
++
++import static java.lang.Math.*;
++import static javax.swing.JOptionPane.showInputDialog;
++
++public class Resolucion {
++
++    private static Persona persona[];
++    private static int numPacientes =0 ;
++
++    //carga con valores random las personas
++    public static void carga(){
++         numPacientes = Integer.parseInt(showInputDialog("Ingrese la cantidad de pacientes a procesar:"));
++        persona = new Persona[numPacientes];
++        int edad, region;
++        //cargamos los pacientes aleatorios
++        for (int i = 0; i < numPacientes;i++){
++            edad = (int) (Math.random()*100+1);
++            region= (int) (Math.random()*4+1);
++            persona[i]= new Persona( edad , random() < 0.5, region , random() < 0.5, random() < 0.5, random() < 0.5);
++        }
++    }
++
++    //muestra por consola los resultados
++    public static void resolver(){
++        for (int j = 0 ; j< numPacientes;j++){
++            System.out.println("persona "+ j + persona[j]);
++        }
++    }
++
++    //retorna la cantidad de casos confirmados
++    public static int cantidadCasosConfirmados(){
++        int contadorPositivo = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if( persona[i].getResultadoTest()) contadorPositivo++;
++        }
++        return contadorPositivo;
++    }
++
++    //retorna el porcentaje de los casos confirmados
++    public static float porcentajeCasos(){
++
++        float porcent = (float) (cantidadCasosConfirmados() * 100  )/ numPacientes;
++        return porcent;
++    }
++
++    //calcula y retorna la edad promedio de los adultos de grupo de riesgo( persona de mas de 60 años y no estan infectadas)
++    public static double edadPromedioMayores(){
++        double promEdad = 0 , cantMayores = 0;
++        for (int i = 0 ; i < numPacientes; i++){
++            if (!persona[i].getResultadoTest() && persona[i].getEdad()>60){
++                promEdad = promEdad + persona[i].getEdad();
++                cantMayores++;
++            }
++        }
++        if(promEdad ==0 ) return 0;
++        promEdad = promEdad / cantMayores;
++        return promEdad;
++    }
++
++    //retorna la cantidad de casos confirmados que son personal de la salud
++    public static int cantidadCasosSalud(){
++        int contadorSaludPos = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if( persona[i].getResultadoTest() && persona[i].getPersSalud()) contadorSaludPos++;
++        }
++        return contadorSaludPos;//cantidad de medicos enfermo
++    }
++
++    //retorna el porcentaje de los confirmados que son personal de salud con respecto al total de infectados
++    public static float promedioSalud(){
++        float saludProm = (float)((cantidadCasosSalud() * 100) / cantidadCasosConfirmados());
++        return saludProm;
++    }
++
++    //retorna la edad promedio de los casos confirmado
++    public static int edadPromCasosConf(){
++        int edad = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if( persona[i].getResultadoTest()){
++                edad += persona[i].getEdad();
++                }
++        }
++        edad= edad/cantidadCasosConfirmados();
++        return edad;
++    }
++
++    //retorna la menor edad de los casos que son autoctonos( Covid positivo y no han viajado)
++    public static int menorEdadAutoctono(){
++        int menorEdad = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if ( persona[i].getResultadoTest() && !persona[i].getViajo() && menorEdad==0){
++                menorEdad = persona[i].getEdad();
++            }
++            if( persona[i].getResultadoTest() && !persona[i].getViajo()&& menorEdad > persona[i].getEdad()){
++                menorEdad = persona[i].getEdad();
++                  }
++        }
++    return menorEdad;
++    }
++
++    //retorna la cantidad de casos por region y su  porcentaje
++    public static String region(){
++        int reg1 = 0, reg2 = 0, reg3 = 0, reg4 = 0;
++        float porc1 = 0, porc2 = 0, porc3 = 0, porc4 = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if( persona[i].getResultadoTest()) {
++                if (persona[i].getRegion() == 1) reg1++;
++                else if (persona[i].getRegion() == 2) reg2++;
++                else if (persona[i].getRegion() == 3) reg3++;
++                else reg4++;
++            }
++        }
++        porc1 = (float)((reg1 * 100) / cantidadCasosConfirmados());
++        porc2 = (float)((reg2 * 100) / cantidadCasosConfirmados());
++        porc3 = (float)((reg3 * 100) / cantidadCasosConfirmados());
++        porc4 = (float)((reg4 * 100) / cantidadCasosConfirmados());
++
++       return "Los casos por región: " +
++                        "\n      Región Capital:  " + reg1 +
++                        "\n      Región Gran Córdoba:  " + reg2 +
++                        "\n      Región Norte:  " + reg3 +
++                        "\n      Región Sur:  " + reg4 +
++               "\nLos porcentajes por región: " +
++                        "\n      Región Capital:  " + porc1 +
++                        "\n      Región Gran Córdoba:  " + porc2 +
++                        "\n      Región Norte:  " + porc3 +
++                        "\n      Región Sur:  " + porc4;
++    }
++
++    //retorna los casos positivos que viajaron al exterior
++    public static int cantidadViajaron(){
++       int contadorViaje = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if( persona[i].getResultadoTest() && persona[i].getViajo()) contadorViaje++;
++        }
++        return contadorViaje;
++    }
++
++    //retorna los casos en contacto con infectados pero todavia no son positivos
++    public static int  casosSospechosos(){
++        int cant = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if( !persona[i].getResultadoTest() && persona[i].getContactoCasos()) cant++;
++        }
++
++        return cant;
++    }
++
++    //retorna que region que no tiene casos
++    public static String regionSinCasos(){
++        String region = "";
++        int reg1 = 0, reg2 = 0, reg3 = 0, reg4 = 0;
++        for (int i = 0; i< numPacientes; i++){
++            if( persona[i].getResultadoTest()) {
++                if (persona[i].getRegion() == 1) reg1++;
++                else if (persona[i].getRegion() == 2) reg2++;
++                else if (persona[i].getRegion() == 3) reg3++;
++                else reg4++;
++            }
++        }
++        System.out.println("reg1: "+reg1 + " reg2: "+ reg2 +" reg3: "+ reg3 + " reg4: " + reg4);
++        if ( reg1 == 0 ){ region += "\n Región Capital ";}
++        if ( reg2 == 0 ){ region += "\n Región Gran Córdoba";}
++        if ( reg3 == 0 ){region += "\n Región Norte";}
++        if ( reg4 == 0 ){ region += "\n Región Sur";}
++        if (reg1 != 0 && reg2 != 0 && reg3 != 0 && reg4 != 0 ){ region = "No tiene region sin casos";}
++        return region;
++    }
++
++    //retorna el porcentaje de casos autoctono con respecto al total
++    public static float porcentCasosAutoct(){
++        int casoAutoct = 0;
++        float porcentaje;
++        for (int i = 0; i< numPacientes; i++){
++            if( persona[i].getResultadoTest() && !persona[i].getViajo()){
++                casoAutoct++;
++            }
++        }
++        porcentaje = (float)((casoAutoct * 100)/cantidadCasosConfirmados());
++        return porcentaje;
++    }
++
++}
+Index: src/practico/Persona.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/practico/Persona.java	(date 1592454838694)
++++ src/practico/Persona.java	(date 1592454838694)
+@@ -0,0 +1,82 @@
++package practico;
++
++public class Persona {
++    private int edad;
++    private boolean resultadoTest;
++    private int region;
++    private boolean contactoCasos;
++    private boolean persSalud;
++    private boolean viajo;
++
++    public Persona() {
++    }
++
++    public Persona(int edad, boolean resultadoTest, int region, boolean contactoCasos, boolean persSalud, boolean viajo) {
++        this.edad = edad;
++        this.resultadoTest = resultadoTest;
++        this.region = region;
++        this.contactoCasos = contactoCasos;
++        this.persSalud = persSalud;
++        this.viajo = viajo;
++    }
++
++    public int getEdad() {
++        return edad;
++    }
++
++    public void setEdad(int edad) {
++        this.edad = edad;
++    }
++
++    public boolean getResultadoTest() {
++        return resultadoTest;
++    }
++
++    public void setResultadoTest(boolean resultadoTest) {
++        this.resultadoTest = resultadoTest;
++    }
++
++    public int getRegion() {
++        return region;
++    }
++
++    public void setRegion(int region) {
++        this.region = region;
++    }
++
++    public boolean getContactoCasos() {
++        return contactoCasos;
++    }
++
++    public void setContactoCasos(boolean contactoCasos) {
++        this.contactoCasos = contactoCasos;
++    }
++
++    public boolean getPersSalud() {
++        return persSalud;
++    }
++
++    public void setPersSalud(boolean persSalud) {
++        this.persSalud = persSalud;
++    }
++
++    public boolean getViajo() {
++        return viajo;
++    }
++
++    public void setViajo(boolean viajo) {
++        this.viajo = viajo;
++    }
++
++    @Override
++    public String toString() {
++        return "Persona{" +
++                "edad=" + edad +
++                ", resultadoTest=" + resultadoTest +
++                ", region=" + region +
++                ", contactoCasos=" + contactoCasos +
++                ", persSalud=" + persSalud +
++                ", viajo=" + viajo +
++                '}';
++    }
++}
+Index: src/practico/Validacion.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/practico/Validacion.java	(date 1592532797395)
++++ src/practico/Validacion.java	(date 1592532797395)
+@@ -0,0 +1,128 @@
++package practico;
++
++import javax.swing.*;
++
++import static javax.swing.JOptionPane.*;
++
++public class Validacion {
++
++    private static String cuenta;
++
++    public static boolean Validar(){
++
++        boolean tiene = false;
++        int j= 1, contadorIngresoMal = 0;
++
++       cuenta = showInputDialog("Ingrese su cuenta de usuario: ");
++       if (cuenta!=null) {          //si apretamos cancelar o aceptar sin nada da error
++           cuenta = cuenta.toLowerCase();
++           cuenta = cuenta.trim();
++
++           int letra = cuenta.indexOf("@");
++           int punto = cuenta.indexOf(".");
++           int doblePunto = cuenta.indexOf("..");
++
++
++           for (int i = 0; i < cuenta.length() && cuenta != null; i++, j++) {
++
++
++               //validacion del @ si esta al principio.
++               if ((letra == 0)) {
++                   JOptionPane.showMessageDialog(null, "El @ no debe estar al principio");
++                   cuenta = showInputDialog("Ingrese su cuenta de usuario con el @ sin estar al principio: ");
++                   if (cuenta == null) break;
++                   cuenta = cuenta.toLowerCase();
++                   cuenta = cuenta.trim();
++                   letra = cuenta.indexOf("@");
++                   i = 0;
++                   contadorIngresoMal++;
++                   if (contadorIngresoMal == 2) break;
++               }
++               //validacion si el @ esta al final.
++               else if (letra == cuenta.length() - 1) {
++                   JOptionPane.showMessageDialog(null, "El @ no debe estar al final");
++                   cuenta = showInputDialog("Ingrese su cuenta de usuario con el @ sin estar al final: ");
++                   if (cuenta == null) break;
++                   cuenta = cuenta.toLowerCase();
++                   cuenta = cuenta.trim();
++                   letra = cuenta.indexOf("@");
++                   i = 0;
++                   contadorIngresoMal++;
++                   if (contadorIngresoMal == 2) break;
++               }
++               //Valida que haya un @.
++               else if (cuenta.charAt(i) == '@' && tiene == false) {
++                   tiene = true;
++               }
++               //Valida que no haya 2 @ sino da error.
++               else if (cuenta.charAt(i) == '@' && tiene == true) {
++                   JOptionPane.showMessageDialog(null, "Hay mas de 2 @ en el dominio");
++                   cuenta = showInputDialog("Ingrese su cuenta de usuario con maximo un @: ");
++                   if (cuenta == null) break;
++                   cuenta = cuenta.toLowerCase();
++                   cuenta = cuenta.trim();
++                   letra = cuenta.indexOf("@");
++                   i = 0;
++                   tiene = false;
++                   contadorIngresoMal++;
++                   if (contadorIngresoMal == 2) break;
++               }
++
++
++               //validacion del punto adelante.
++
++               if ((punto == 0)) {
++                   JOptionPane.showMessageDialog(null, "El . no debe estar al principio");
++                   cuenta = showInputDialog("Ingrese su cuenta de usuario con el . sin estar al principio: ");
++                   if (cuenta == null) break;
++                   cuenta = cuenta.toLowerCase();
++                   cuenta = cuenta.trim();
++                   punto = cuenta.indexOf(".");
++                   i = 0;
++                   contadorIngresoMal++;
++                   if (contadorIngresoMal == 2) break;
++               }
++
++               //validacion del punto al final.
++               else if (punto == cuenta.length() - 1) {
++                   JOptionPane.showMessageDialog(null, "El . no debe estar al final");
++                   cuenta = showInputDialog("Ingrese su cuenta de usuario con el . sin estar al final: ");
++                   if (cuenta == null) break;
++                   cuenta = cuenta.toLowerCase();
++                   cuenta = cuenta.trim();
++                   punto = cuenta.indexOf(".");
++                   i = 0;
++                   contadorIngresoMal++;
++                   if (contadorIngresoMal == 2) break;
++               }
++
++               //validacion de que no haya 2 puntos seguidos.
++               else if (j < cuenta.length() && cuenta.charAt(i) == '.' && cuenta.charAt(i) == cuenta.charAt(j)) {
++                   JOptionPane.showMessageDialog(null, "No puede haber dos puntos seguidos.");
++                   cuenta = showInputDialog("Ingrese su cuenta de usuario sin que haya dos puntos seguidos: ");
++                   if (cuenta == null) break;
++                   cuenta = cuenta.toLowerCase();
++                   cuenta = cuenta.trim();
++                   punto = cuenta.indexOf(".");
++                   i = 0;
++                   j = 1;
++                   contadorIngresoMal++;
++                   if (contadorIngresoMal == 2) break;
++               }
++
++           }
++            //se fija que no haya habido 3 ingresos mal hecho
++           if (contadorIngresoMal == 2) {
++               JOptionPane.showMessageDialog(null, "Realizo mas de 3 intentos incorrectos.");
++
++           }
++       }
++       //mensaje de finalizacion del programa al poner mal 3 veces el usuario
++       if(cuenta==null || contadorIngresoMal == 2) {
++           JOptionPane.showMessageDialog(null, "Fin");
++           return false;
++       }
++       return true;
++    }
++
++}
